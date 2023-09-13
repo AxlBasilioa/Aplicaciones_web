@@ -1,3 +1,4 @@
+//home.page.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+direccion:any;
+
   constructor() {}
 
+leerInputs(){
+  const fecha = new Date();
+  const fechaActual = fecha.toLocaleDateString('en-GB', {day:'2-digit',month:'2-digit', year:'2-digit'});
+  console.log(fechaActual);
+}
 }
