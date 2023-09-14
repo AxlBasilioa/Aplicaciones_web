@@ -1,5 +1,6 @@
 //home.page.ts
 import { Component } from '@angular/core';
+import axios from 'axios';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,38 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-direccion:any;
-
+  direccion:any;
+  colonia:any;
   constructor() {}
 
-leerInputs(){
-  const fecha = new Date();
-  const fechaActual = fecha.toLocaleDateString('en-GB', {day:'2-digit',month:'2-digit', year:'2-digit'});
-  console.log(fechaActual);
+  async codificarURI(){
+    const direccion = encodeURIComponent(this.direccion);
+    const key = 'AIzaSyCHOAxhViHw9BvSwlhqwq4OoUU1vzKA2E0';
+    const proxyUrl = 'https://us-central1-rodsardb.cloudfunctions.net/api/directions';
+    const miDireccion = encodeURIComponent('Avenida Universidad Tecnologica numero 200');
+    const geoApi = `${proxyUrl}?direccion1=${miDireccion}?direccion2=${direccion}`;
+    try{
+      const response = await axios.get(geoApi);
+      console.log(response);
+    }catch(error){
+
+    }
+  }
 }
-}
+//npm install axios cors express
+
+
+
+
+
+
+
+
+
+
+//const apiKey = 'AIzaSyCHOAxhViHw9BvSwlhqwq4OoUU1vzKA2E0';
+//  const proxyUrl = 'https://us-central1-rodsardb.cloudfunctions.net/api/directions';
+//&destination=
+//const geocodingApiUrl = `${proxyUrl}?direccion1=${encodeURIComponent(direccion1)}&direccion2=${encodeURIComponent(direccion2)}`;
+
+// &units=metric&language=es&key=
